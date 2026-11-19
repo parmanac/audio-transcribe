@@ -1,0 +1,3 @@
+# Instala el paquete en modo editable junto con sus dependencias.
+# Equivalente a: python -m pip install -e .
+-e .
