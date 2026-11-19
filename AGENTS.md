@@ -3,8 +3,9 @@
 ## Scope
 
 This Python library and CLI transcribe speech from audio files and the audio track of videos.
-The default exports are an SRT subtitle file and an editable DOCX for each recording. Keep these
-defaults consistent in the CLI, Python API, examples, and tests. The default language is Spanish.
+Each recording produces a Markdown transcript and SRT subtitles by default. DOCX, TXT, JSON,
+and WebVTT are optional exports. Keep the defaults consistent in the CLI, Python API, examples,
+and tests. The default language is Spanish.
 
 ## Project layout
 
@@ -32,8 +33,9 @@ python -m venv .venv
 ```
 
 Unit tests must run offline without model weights or API keys. For changes to recognition or
-exports, also transcribe a short local recording. Inspect the subtitle timings, reopen the DOCX,
-and compare its text with the SRT. If layout changes, render the Word document and inspect the pages.
+exports, also transcribe a short local recording. Inspect the subtitle timings and compare the
+Markdown text with the SRT. For changes to the optional DOCX export, reopen the document and
+inspect the rendered pages if its layout changes.
 Use an isolated temporary directory for smoke-test outputs.
 
 ## Repository contents

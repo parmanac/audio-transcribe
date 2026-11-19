@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "transcribe-audio"
 version = "0.4.0"
-description = "Transcripción de archivos de audio y vídeo a subtítulos SRT y documentos de Word editables."
+description = "Transcripción de archivos de audio y vídeo a Markdown y subtítulos SRT, con exportación opcional a Word y otros formatos."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

@@ -31,7 +31,7 @@ def configure_console() -> None:
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog="transcribe-audio",
-        description="Transcribe archivos de audio y vídeo a subtítulos SRT y documentos de Word editables.",
+        description="Transcribe archivos de audio y vídeo a Markdown y subtítulos SRT.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")

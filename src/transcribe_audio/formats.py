@@ -13,7 +13,7 @@ from typing import Any, Iterator, Sequence
 from .models import Segment, Transcript
 from .text_utils import join_transcript_text, to_jsonable
 
-DEFAULT_FORMATS = ("srt", "docx")
+DEFAULT_FORMATS = ("md", "srt")
 ALL_FORMATS = ["txt", "md", "json", "srt", "vtt", "docx"]
 TIMESTAMP_FORMATS = {"srt", "vtt"}
 

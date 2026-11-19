@@ -1,11 +1,10 @@
 # audio-transcribe
 
 Biblioteca Python y herramienta de línea de comandos para transcribir archivos de audio y
-la pista de audio de un vídeo. Por cada grabación genera dos archivos en `transcripciones/`:
+la pista de audio de un vídeo. Por defecto, cada grabación genera dos archivos en `transcripciones/`.
 
-- **SRT** con subtítulos numerados y tiempos de inicio y fin.
-- **DOCX** con el texto editable en Word o LibreOffice. Las marcas de tiempo señalan el inicio
-  de cada párrafo y permiten localizar el pasaje en la grabación.
+- **Markdown** (`.md`) con la transcripción para leer y editar.
+- **SRT** (`.srt`) con subtítulos numerados y tiempos de inicio y fin.
 
 El motor predeterminado, **faster-whisper**, procesa el audio en el equipo. La primera vez
 descarga los pesos del modelo. También se puede elegir la API de OpenAI.
@@ -32,7 +31,8 @@ transcribe-audio clase.mp4 --language auto
 transcribe-audio grabaciones --recursive --output-dir salidas
 ```
 
-El primer comando crea `transcripciones/entrevista.srt` y `transcripciones/entrevista.docx`.
+El primer comando crea `transcripciones/entrevista.md` y `transcripciones/entrevista.srt`.
+Para añadir un Word editable, usa `transcribe-audio entrevista.flac --formats md srt docx`.
 Admite, entre otros, WAV, MP3, FLAC, AAC, M4A, AIFF, OGG, Opus, MP4, MOV y MKV.
 Si la extensión es desconocida o el archivo carece de ella, la herramienta examina el contenido
 para detectar una pista de audio. La compatibilidad depende de los códecs del motor.
@@ -52,8 +52,8 @@ El comando también se puede invocar como `python -m transcribe_audio`. En Windo
 | `--backend local` | Usa `large-v3` con CUDA o `medium` en CPU. `--model large-v3-turbo` es una opción multilingüe para grabaciones largas. |
 | `--backend openai` | Envía el audio a OpenAI y necesita la variable de entorno `OPENAI_API_KEY`. Para las salidas predeterminadas usa `whisper-1`, que proporciona los tiempos del SRT. |
 | `--backend openai --formats docx` | Usa `gpt-transcribe` para texto. Si el modelo devuelve solo texto, el documento contiene párrafos sin marcas de tiempo. |
-| `--backend openai --diarize` | Usa `gpt-4o-transcribe-diarize`. El SRT y el Word identifican los turnos con las etiquetas que devuelve el modelo. |
-| `--formats` | Admite `srt docx txt md json vtt` y `all`. Una lista explícita sustituye las dos salidas predeterminadas. |
+| `--backend openai --diarize` | Usa `gpt-4o-transcribe-diarize`. Las salidas Markdown y SRT identifican los turnos con las etiquetas que devuelve el modelo. |
+| `--formats` | Admite `md srt docx txt json vtt` y `all`. Una lista explícita sustituye las dos salidas predeterminadas. |
 
 Para orientar el reconocimiento hacia nombres propios o vocabulario especializado, usa
 `--prompt` o `--prompt-file palabras.txt`. El JSON local incluye tiempos por palabra por
@@ -77,8 +77,8 @@ rutas = write_outputs(resultado, Path("salidas/entrevista"))
 transcribe_dir("grabaciones", output_dir="salidas", recursive=True)
 ```
 
-`transcribe_file` devuelve la transcripción en memoria. `write_outputs` guarda el SRT y el
-DOCX a partir de ese mismo resultado. `transcribe_dir` guarda los archivos de cada grabación
+`transcribe_file` devuelve la transcripción en memoria. `write_outputs` guarda el Markdown y el
+SRT a partir de ese mismo resultado. `transcribe_dir` guarda los archivos de cada grabación
 y reutiliza el modelo local.
 
 ## Pruebas
